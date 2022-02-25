@@ -90,9 +90,13 @@ public class MovieFacade {
 
     public List<Movie> getMovieByTitle(String title) {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Movie> query = em.createQuery("SELECT m FROM Movie m WHERE m.title LIKE :title", Movie.class);
-        query.setParameter("title", title);
-        List<Movie> results = query.getResultList();
-        return results;
+        try{
+            TypedQuery<Movie> query = em.createNamedQuery("Movie.getByTitle", Movie.class);
+            query.setParameter("title", title);
+            List<Movie> results = query.getResultList();
+            return results;
+        }finally {
+            em.close();
+        }
     }
 }

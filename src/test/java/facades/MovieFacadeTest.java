@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
 public class MovieFacadeTest {
@@ -62,6 +64,11 @@ public class MovieFacadeTest {
     public void testAFacadeMethod() throws Exception {
         assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
     }
-    
 
+    @Test
+    void getMovieByTitle() {
+        int expected = 1;
+        int actual = facade.getMovieByTitle("some title").size();
+        assertEquals(actual, expected);
+    }
 }
